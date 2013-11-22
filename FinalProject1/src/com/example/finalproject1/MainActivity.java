@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.*;
 
 import android.location.Address;
@@ -32,7 +33,7 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	
 	LocationManager locationManager; 
 	Location currentLocation; 
-	//private GoogleMap map; 
+	String stringtest ="lalalalalala";
 	Button searchButton; 
 	Button favoriteButton; 
 	Button groupButton; 
@@ -40,6 +41,8 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	List <Address> addresses;
 	StringBuilder myAddressString; 
 	static public String storeAddress; 
+	Marker marker;
+	GoogleMap map;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -72,40 +75,40 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 
 		locationManager.requestLocationUpdates(bestProvider, 5000, 2.0f, this); 
 		
-		status.setText(" "+ myAddressString); 
-		Toast.makeText(this, myAddressString, Toast.LENGTH_SHORT).show();
+		status.setText(" "+ storeAddress); 
+		//storeAddress.setText(.getTitle());
+		//String addressTest = myAddressString.toString();
+		//Toast.makeText(this, myAddressString, Toast.LENGTH_SHORT).show();
 
-//		Bundle extras = intent.getExtras(); 
-//		String addressGet = extras.getString("address");
-//		
-//		//set location on Google maps
-		LatLng LOCATION_CURRENT= new LatLng(currentLocation.getLatitude() , currentLocation.getLongitude());
+ 		LatLng LOCATION_CURRENT= new LatLng(currentLocation.getLatitude() , currentLocation.getLongitude());
         GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         map.setMyLocationEnabled(true);
-        map.addMarker(new MarkerOptions().position(LOCATION_CURRENT).title( storeAddress   ));
-        Toast.makeText(this, storeAddress, Toast.LENGTH_SHORT).show();
-////
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_CURRENT, 13));
-//   
+        map.addMarker(new MarkerOptions().position(LOCATION_CURRENT).title("."+storeAddress).draggable(true));
 //        
-//        map.addMarker(new MarkerOptions().title("Find me here!"));
-		
-//        LatLng sydney = new LatLng(-33.867, 151.206);
-//
-//        map.setMyLocationEnabled(true);
-//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-//
-//        map.addMarker(new MarkerOptions()
-//                .title("Sydney")
-//                .snippet("The most populous city in Australia.")
-//                .position(sydney));
+////        Toast.makeText(this, storeAddress, Toast.LENGTH_SHORT).show();
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_CURRENT, 13));
+
+        map.setOnMapClickListener(new OnMapClickListener() {
+			
+			@Override
+			public void onMapClick(LatLng point) {
+				// TODO Auto-generated method stub
+				
+				
+				
+				Toast.makeText(getBaseContext(), "Marker is added to the Map", Toast.LENGTH_SHORT).show();	
+			}
+		}); 
         
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+	
 		return true;
 	}
 
@@ -114,30 +117,19 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 		// TODO Auto-generated method stub
 		int buttonId = v.getId();
 		
-//		if(buttonId == 1){
-//			Intent intent = new Intent(this, Search.class); 
-//			startActivity(intent); 
-//			Toast.makeText(this, "button 1 has been triggered", Toast.LENGTH_SHORT).show();
-//		}
+
 		
 		if(buttonId == 2){
 			Intent intent = new Intent(this, Favourite.class); 
 			startActivity(intent); 
-			Toast.makeText(this, "button 2 has been triggered", Toast.LENGTH_SHORT).show();
+		
 		}
 		
 		else if(buttonId == 3){
-			Intent intent = new Intent(this, Groups.class); 
+			Intent intent = new Intent(this, Contact.class); 
 			startActivity(intent); 
-			Toast.makeText(this, "button 3 has been triggered", Toast.LENGTH_SHORT).show();
-		}
 		
-		else {
-			
-			Toast.makeText(this, "Button Failed", Toast.LENGTH_SHORT).show();
 		}
-		
-
 		
 	}
 
@@ -152,7 +144,7 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 		
 	}
 
-	private void getAddress(Location location) {
+	public void getAddress(Location location) {
 		// TODO Auto-generated method stub
 		Bundle extras = new Bundle();
 		
@@ -163,11 +155,11 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 			
 			if (addresses != null) {
 				Address currentAddress = addresses.get(0); 
-				myAddressString = new StringBuilder("Address: \n");
+				myAddressString = new StringBuilder("Address: ");
 				
 				
 				for (int i = 0; i < currentAddress.getMaxAddressLineIndex(); i++) {
-					myAddressString.append(currentAddress.getAddressLine(i)).append("\n");
+					myAddressString.append(currentAddress.getAddressLine(i)).append("");
 					
 				}
 				
@@ -184,11 +176,14 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 		
 
 		String storeAddress = myAddressString.toString();
-		Toast.makeText(this, storeAddress, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, storeAddress, Toast.LENGTH_SHORT).show();
 
 		
 		
 	}
+	
+	
+
 
 	@Override
 	public void onProviderDisabled(String provider) {
@@ -206,6 +201,24 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+//	@Override
+//	public void onMapClick(LatLng point) {
+//		// TODO Auto-generated method stub
+//		
+//
+//		
+//		Toast.makeText(this, myAddressString, Toast.LENGTH_SHORT).show();
+//		
+//	}
+	
+	
+	public class setMarker {
+		
+	
 	}
 
 }

@@ -47,55 +47,32 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:background="@drawable/search_button"
-                android:drawableLeft="@drawable/search"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:text="Search Location"            
-                android:width="100dp"
-                 />
+                android:text="Search Location"
+                android:textSize="10sp"
+                android:width="100dp" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:background="@drawable/favorites_button_black"
-                android:drawableLeft="@drawable/favorites"
-                android:gravity="center_vertical|center_horizontal"
                 android:text="Favorites"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:width="90dp" />
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:background="@drawable/group_button_black"
-                android:drawableLeft="@drawable/contacts"
                 android:text="Contacts"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:width="90dp" />
         </TableRow>
 
     </TableLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
 
 </TableLayout>
