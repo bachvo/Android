@@ -51,7 +51,7 @@ public class Favourite extends Activity implements OnClickListener {
 		}
 		
 		else if(buttonId == 3){
-			Intent intent = new Intent(this, Groups.class); 
+			Intent intent = new Intent(this, Contact.class); 
 			startActivity(intent); 
 			//Toast.makeText(this, "button 3 has been triggered", Toast.LENGTH_SHORT).show();
 		}
